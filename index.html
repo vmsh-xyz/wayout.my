@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Way Out</title>
+    <link rel="icon" type="image/png" href="img/favicon-84.png">
+    <meta name="description" content="Vik & Sab 🍒 visual artists🔹professional doodlers 🔸
+all work our own">
+    <meta property="og:image" content="https://wayout.my/favicon-256.png">
+    <meta property="og:image:type" content="image/jpeg">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:image" content="https://wayout.my/favicon-256.png">
+    <style>
+        html {
+            background-color: #000000;
+            height: 100%;
+            transition: filter 0.3s ease;
+        }
+
+        html.theme-white {
+            filter: invert(1);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .door-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .door {
+            width: 200px;
+            height: 420px;
+            background-image: url('img/wayoutdoor.webp');
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+            position: relative;
+        }
+
+        .door-handle {
+            position: absolute;
+            right: 18px;
+            top: 55%;
+            width: 10px;
+            height: 10px;
+            background-color: #222222;
+            border-radius: 50%;
+        }
+
+        .doorbell {
+            position: absolute;
+            left: calc(100% + 20px);
+            top: 30%;
+            width: 20px;
+            height: 20px;
+            background-color: #ffffff;
+            border: 6px solid #ff1e02;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(255, 255, 255, 0.2);
+            transition: transform 0.1s ease;
+        }
+
+        .doorbell:hover {
+            transform: scale(1.1);
+        }
+
+        .doorbell:active {
+            transform: scale(0.95);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="door-wrapper">
+        <div class="door">
+            <div class="door-handle"></div>
+        </div>
+        <button id="themeToggle" class="doorbell" aria-label="Смени темата"></button>
+    </div>
+
+    <script>
+        const themeToggleBtn = document.getElementById('themeToggle');
+        themeToggleBtn.addEventListener('click', () => {
+            document.documentElement.classList.toggle('theme-white');
+        });
+    </script>
+
+</body>
+
+</html>
