@@ -87,13 +87,26 @@ all work our own">
         <div class="door">
             <div class="door-handle"></div>
         </div>
-        <button id="themeToggle" class="doorbell" aria-label="Смени темата"></button>
+        <button id="themeToggle" class="doorbell" aria-label="black or music"></button>
     </div>
 
     <script>
         const themeToggleBtn = document.getElementById('themeToggle');
+
+        const doorbellSound = new Audio('westlife.mp3');
+
         themeToggleBtn.addEventListener('click', () => {
-            document.documentElement.classList.toggle('theme-white');
+            const isWhiteTheme = document.documentElement.classList.toggle('theme-white');
+
+            if (isWhiteTheme) {
+                doorbellSound.currentTime = 0;
+                doorbellSound.play().catch(error => {
+                    console.log('Аудиото не можа да се възпроизведе:', error);
+                });
+            } else {
+                doorbellSound.pause();
+                doorbellSound.currentTime = 0;
+            }
         });
     </script>
 
