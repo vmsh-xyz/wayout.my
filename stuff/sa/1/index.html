@@ -1,243 +1,169 @@
 <!DOCTYPE html>
 <html lang="bg">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>wayout.my - Sabina Stefanova</title>
-    <!-- Tailwind CSS -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- FontAwesome За Икони -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
-    <style>
-        @keyframes subtlePulse {
-            0% {
-                background-color: #050505;
-                box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.9);
-            }
-            50% {
-                background-color: #3f3f44;
-                box-shadow: inset 0 0 120px rgba(45, 55, 72, 0.25);
-            }
-            100% {
-                background-color: #050505;
-                box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.9);
-            }
-        }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Галерия от 22 Изображения</title>
+  <style>
+    /* Нулиране на базовите стилове */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
 
-        body {
-            animation: subtlePulse 8s infinite ease-in-out;
-            margin: 0;
-            padding: 0;
-            overflow: hidden;
-            font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-        }
+    body, html {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      font-family: system-ui, -apple-system, sans-serif;
+    }
 
-        /* Обща продължителност: 36 секунди (по 4 секунди на снимка) */
-        @keyframes cssGallery {
-            0% { opacity: 0; transform: scale(1.02); z-index: 1; }
-            3.5% { opacity: 1; transform: scale(1); z-index: 63; }   /* Бавно плавно появяване */
-            11.11% { opacity: 1; transform: scale(1); z-index: 63; } /* Задържане на снимката */
-            14.61% { opacity: 0; transform: scale(1.02); z-index: 1; } /* Бавно изчезване */
-            100% { opacity: 0; transform: scale(1.02); z-index: 1; }
-        }
+    /* Пулсиращ черен фон */
+    body {
+      background-color: #050505;
+      animation: subtlePulse 8s ease-in-out infinite alternate;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
 
-        /* Задаване на отсрочка (animation-delay) за всяка от 9-те снимки */
-        .slide-item {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 24s ease-in-out, transform 4s ease-in-out;
-            animation: cssGallery 36s infinite ease-in-out;
-        }
+    @keyframes subtlePulse {
+      0% {
+        background-color: #030305;
+        box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.95);
+      }
+      50% {
+        background-color: #0d0d12;
+        box-shadow: inset 0 0 150px rgba(15, 23, 42, 0.6);
+      }
+      100% {
+        background-color: #050505;
+        box-shadow: inset 0 0 100px rgba(0, 0, 0, 0.95);
+      }
+    }
 
-        .slide-1 { animation-delay: 0s; }
-        .slide-2 { animation-delay: 4s; }
-        .slide-3 { animation-delay: 8s; }
-        .slide-4 { animation-delay: 12s; }
-        .slide-5 { animation-delay: 16s; }
-        .slide-6 { animation-delay: 20s; }
-        .slide-7 { animation-delay: 24s; }
-        .slide-8 { animation-delay: 28s; }
-        .slide-9 { animation-delay: 32s; }
+    /* Главен контейнер за галерията */
+    .gallery-container {
+      position: relative;
+      width: 100vw;
+      height: 85vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
 
-        /* И индикатори, съответстващи на активната снимка чрез CSS анимация */
-        @keyframes activeDot {
-            0%, 10.11% { background-color: #ffffff; transform: scale(1.3); }
-            11.11%, 100% { background-color: rgba(255, 255, 255, 0.3); transform: scale(1); }
-        }
+    /* Общи стилове за слайдовете */
+    .slide-item {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      /* Бавен и плавен преход при ръчна смяна или hover */
+      transition: opacity 2s ease-in-out, visibility 2s ease-in-out;
+      animation: gallery22 110s infinite ease-in-out;
+    }
 
-        .dot-item {
-            animation: activeDot 54s infinite ease-in-out;
-        }
+    /* Ограничения за изображението според височината на екрана */
+    .slide-item img {
+      max-height: 100%;
+      max-width: 95vw;
+      object-fit: contain;
+      border-radius: 8px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.8);
+    }
 
-        .dot-1 { animation-delay: 0s; }
-        .dot-2 { animation-delay: 4s; }
-        .dot-3 { animation-delay: 8s; }
-        .dot-4 { animation-delay: 12s; }
-        .dot-5 { animation-delay: 16s; }
-        .dot-6 { animation-delay: 20s; }
-        .dot-7 { animation-delay: 24s; }
-        .dot-8 { animation-delay: 28s; }
-        .dot-9 { animation-delay: 32s; }
+    /* При посочване с мишката галерията спира, за да разгледате текущата снимка */
+    .gallery-container:hover .slide-item {
+      animation-play-state: paused;
+    }
 
-        /* Позволява пауза при преминаване с мишката */
-        .gallery-container:hover .slide-item,
-        .gallery-container:hover .dot-item {
-            animation-play-state: paused;
-        }
+    /* Автоматични забавяния (animation-delay) за 22 изображения */
+    /* Всяко изображение се забавя с по 5 секунди (110s общо / 22 = 5s) */
+    .slide-item:nth-child(1)  { animation-delay: 0s; }
+    .slide-item:nth-child(2)  { animation-delay: 5s; }
+    .slide-item:nth-child(3)  { animation-delay: 10s; }
+    .slide-item:nth-child(4)  { animation-delay: 15s; }
+    .slide-item:nth-child(5)  { animation-delay: 20s; }
+    .slide-item:nth-child(6)  { animation-delay: 25s; }
+    .slide-item:nth-child(7)  { animation-delay: 30s; }
+    .slide-item:nth-child(8)  { animation-delay: 35s; }
+    .slide-item:nth-child(9)  { animation-delay: 40s; }
+    .slide-item:nth-child(10) { animation-delay: 45s; }
+    .slide-item:nth-child(11) { animation-delay: 50s; }
+    .slide-item:nth-child(12) { animation-delay: 55s; }
+    .slide-item:nth-child(13) { animation-delay: 60s; }
+    .slide-item:nth-child(14) { animation-delay: 65s; }
+    .slide-item:nth-child(15) { animation-delay: 70s; }
+    .slide-item:nth-child(16) { animation-delay: 75s; }
+    .slide-item:nth-child(17) { animation-delay: 80s; }
+    .slide-item:nth-child(18) { animation-delay: 85s; }
+    .slide-item:nth-child(19) { animation-delay: 90s; }
+    .slide-item:nth-child(20) { animation-delay: 95s; }
+    .slide-item:nth-child(21) { animation-delay: 100s; }
+    .slide-item:nth-child(22) { animation-delay: 105s; }
 
-        /* За ръчен избор чрез CSS Target / Radio Buttons */
-        input[name="gallery-control"] {
-            display: none;
-        }
-
-        #select-1:checked ~ .gallery-viewport .slide-1,
-        #select-2:checked ~ .gallery-viewport .slide-2,
-        #select-3:checked ~ .gallery-viewport .slide-3,
-        #select-4:checked ~ .gallery-viewport .slide-4,
-        #select-5:checked ~ .gallery-viewport .slide-5,
-        #select-6:checked ~ .gallery-viewport .slide-6,
-        #select-7:checked ~ .gallery-viewport .slide-7,
-        #select-8:checked ~ .gallery-viewport .slide-8,
-        #select-9:checked ~ .gallery-viewport .slide-9 {
-            animation: none !important;
-            opacity: 1 !important;
-            z-index: 20 !important;
-            transform: scale(1) !important;
-        }
-
-        /* Стил за точките при клик */
-        #select-1:checked ~ .dots-container label[for="select-1"],
-        #select-2:checked ~ .dots-container label[for="select-2"],
-        #select-3:checked ~ .dots-container label[for="select-3"],
-        #select-4:checked ~ .dots-container label[for="select-4"],
-        #select-5:checked ~ .dots-container label[for="select-5"],
-        #select-6:checked ~ .dots-container label[for="select-6"],
-        #select-7:checked ~ .dots-container label[for="select-7"],
-        #select-8:checked ~ .dots-container label[for="select-8"],
-        #select-9:checked ~ .dots-container label[for="select-9"] {
-            animation: none !important;
-            background-color: #3b82f6 !important;
-            transform: scale(1.4) !important;
-        }
-
-        /* При ръчна селекция спираме автоматичната анимация на индикаторите */
-        input[name="gallery-control"]:checked ~ .dots-container .dot-item {
-            animation: none;
-            background-color: rgba(255, 255, 255, 0.3);
-        }
-    </style>
+    /* Бавни и плавни ключови кадри за прехода между 22 картинки */
+    @keyframes gallery22 {
+      0% {
+        opacity: 0;
+        visibility: visible;
+      }
+      /* Плавно поплавяне (1.5% от 110s = ~1.65 секунди fade-in) */
+      1.5% {
+        opacity: 1;
+        visibility: visible;
+      }
+      /* Задържане на изображението */
+      4.545% {
+        opacity: 1;
+        visibility: visible;
+      }
+      /* Плавно изчезване (6% от 110s = ~1.65 секунди fade-out) */
+      6.045% {
+        opacity: 0;
+        visibility: hidden;
+      }
+      100% {
+        opacity: 0;
+        visibility: hidden;
+      }
+    }
+  </style>
 </head>
-<body class="min-h-screen flex flex-col items-center justify-between text-white select-none">
+<body>
 
-    <main class="gallery-container relative w-full flex-1 flex items-center justify-center p-4 md:p-8">
-        
-        <!-- Скрити радио бутони за интерактивен избор само с CSS -->
-        <input type="radio" name="gallery-control" id="select-1">
-        <input type="radio" name="gallery-control" id="select-2">
-        <input type="radio" name="gallery-control" id="select-3">
-        <input type="radio" name="gallery-control" id="select-4">
-        <input type="radio" name="gallery-control" id="select-5">
-        <input type="radio" name="gallery-control" id="select-6">
-        <input type="radio" name="gallery-control" id="select-7">
-        <input type="radio" name="gallery-control" id="select-8">
-        <input type="radio" name="gallery-control" id="select-9">
-
-        <!-- Вюпорт за слайдера с ограничение във височината (до 82vh) -->
-        
-
-            <!-- Снимка 1 -->
-            <div class="slide-item slide-1 flex items-center justify-center p-2">
-                <img src="1.png" 
-                     alt="Sabina Stefanova" 
-                     class="max-h-full max-w-full object-contain rounded-lg shadow-2xl transition-all duration-500"
-                     onerror="this.src='https://placehold.co/1200x800/111/fff?text=Снимка+1'">
-            </div>
-
-            <!-- Снимка 2 -->
-            <div class="slide-item slide-2 flex items-center justify-center p-2">
-                <img src="2.png" 
-                     alt="Sabina Stefanova" 
-                     class="max-h-full max-w-full object-contain rounded-lg shadow-2xl transition-all duration-500"
-                     onerror="this.src='https://placehold.co/1200x800/222/fff?text=Снимка+2'">
-            </div>
-
-            <!-- Снимка 3 -->
-            <div class="slide-item slide-3 flex items-center justify-center p-2">
-                <img src="3.png" 
-                     alt="Sabina Stefanova" 
-                     class="max-h-full max-w-full object-contain rounded-lg shadow-2xl transition-all duration-500"
-                     onerror="this.src='https://placehold.co/1200x800/333/fff?text=Снимка+3'">
-            </div>
-
-            <!-- Снимка 4 -->
-            <div class="slide-item slide-4 flex items-center justify-center p-2">
-                <img src="4.png" 
-                     alt="Sabina Stefanova" 
-                     class="max-h-full max-w-full object-contain rounded-lg shadow-2xl transition-all duration-500"
-                     onerror="this.src='https://placehold.co/1200x800/444/fff?text=Снимка+4'">
-            </div>
-
-            <!-- Снимка 5 -->
-            <div class="slide-item slide-5 flex items-center justify-center p-2">
-                <img src="5.png"
-                     alt="Sabina Stefanova" 
-                     class="max-h-full max-w-full object-contain rounded-lg shadow-2xl transition-all duration-500"
-                     onerror="this.src='https://placehold.co/1200x800/555/fff?text=Снимка+5'">
-            </div>
-
-            <!-- Снимка 6 -->
-            <div class="slide-item slide-6 flex items-center justify-center p-2">
-                <img src="6.png" 
-                     alt="Sabina Stefanova" 
-                     class="max-h-full max-w-full object-contain rounded-lg shadow-2xl transition-all duration-500"
-                     onerror="this.src='https://placehold.co/1200x800/666/fff?text=Снимка+6'">
-            </div>
-
-            <!-- Снимка 7 -->
-            <div class="slide-item slide-7 flex items-center justify-center p-2">
-                <img src="7.png" 
-                     alt="Sabina Stefanova" 
-                     class="max-h-full max-w-full object-contain rounded-lg shadow-2xl transition-all duration-500"
-                     onerror="this.src='https://placehold.co/1200x800/777/fff?text=Снимка+7'">
-            </div>
-
-            <!-- Снимка 8 -->
-            <div class="slide-item slide-8 flex items-center justify-center p-2">
-                <img src="8.png" 
-                     alt="Sabina Stefanova" 
-                     class="max-h-full max-w-full object-contain rounded-lg shadow-2xl transition-all duration-500"
-                     onerror="this.src='https://placehold.co/1200x800/888/fff?text=Снимка+8'">
-            </div>
-
-            <!-- Снимка 9 -->
-            <div class="slide-item slide-9 flex items-center justify-center p-2">
-                <img src="9.png" 
-                     alt="Sabina Stefanova" 
-                     class="max-h-full max-w-full object-contain rounded-lg shadow-2xl transition-all duration-500"
-                     onerror="this.src='https://placehold.co/1200x800/999/fff?text=Снимка+9'">
-            </div>
-
-
-
-        <!-- Индикатори за смяна (работят както автоматично, така и с клик чрез лабели) 
-        <div class="dots-container absolute bottom-6 left-1/2 transform -translate-x-1/2 flex items-center gap-3 z-30 px-4 py-2 rounded-full bg-black/40 backdrop-blur-md border border-white/10">
-            <label for="select-1" title="Снимка 1" class="dot-item dot-1 w-3 h-3 rounded-full cursor-pointer transition-all duration-300 hover:scale-125"></label>
-            <label for="select-2" title="Снимка 2" class="dot-item dot-2 w-3 h-3 rounded-full cursor-pointer transition-all duration-300 hover:scale-125"></label>
-            <label for="select-3" title="Снимка 3" class="dot-item dot-3 w-3 h-3 rounded-full cursor-pointer transition-all duration-300 hover:scale-125"></label>
-            <label for="select-4" title="Снимка 4" class="dot-item dot-4 w-3 h-3 rounded-full cursor-pointer transition-all duration-300 hover:scale-125"></label>
-            <label for="select-5" title="Снимка 5" class="dot-item dot-5 w-3 h-3 rounded-full cursor-pointer transition-all duration-300 hover:scale-125"></label>
-            <label for="select-6" title="Снимка 6" class="dot-item dot-6 w-3 h-3 rounded-full cursor-pointer transition-all duration-300 hover:scale-125"></label>
-            <label for="select-7" title="Снимка 7" class="dot-item dot-7 w-3 h-3 rounded-full cursor-pointer transition-all duration-300 hover:scale-125"></label>
-            <label for="select-8" title="Снимка 8" class="dot-item dot-8 w-3 h-3 rounded-full cursor-pointer transition-all duration-300 hover:scale-125"></label>
-            <label for="select-9" title="Снимка 9" class="dot-item dot-9 w-3 h-3 rounded-full cursor-pointer transition-all duration-300 hover:scale-125"></label>
-        </div>-->
-
-    </main>
+  <div class="gallery-container">
+    <div class="slide-item"><img src="1.png" alt="Снимка 1"></div>
+    <div class="slide-item"><img src="2.png" alt="Снимка 2"></div>
+    <div class="slide-item"><img src="3.png" alt="Снимка 3"></div>
+    <div class="slide-item"><img src="4.png" alt="Снимка 4"></div>
+    <div class="slide-item"><img src="5.png" alt="Снимка 5"></div>
+    <div class="slide-item"><img src="6.png" alt="Снимка 6"></div>
+    <div class="slide-item"><img src="7.png" alt="Снимка 7"></div>
+    <div class="slide-item"><img src="8.png" alt="Снимка 8"></div>
+    <div class="slide-item"><img src="9.png" alt="Снимка 9"></div>
+    <div class="slide-item"><img src="10.png" alt="Снимка 10"></div>
+    <div class="slide-item"><img src="11.png" alt="Снимка 11"></div>
+    <div class="slide-item"><img src="12.png" alt="Снимка 12"></div>
+    <div class="slide-item"><img src="13.png" alt="Снимка 13"></div>
+    <div class="slide-item"><img src="14.png" alt="Снимка 14"></div>
+    <div class="slide-item"><img src="15.png" alt="Снимка 15"></div>
+    <div class="slide-item"><img src="16.png" alt="Снимка 16"></div>
+    <div class="slide-item"><img src="17.png" alt="Снимка 17"></div>
+    <div class="slide-item"><img src="18.png" alt="Снимка 18"></div>
+    <div class="slide-item"><img src="19.png" alt="Снимка 19"></div>
+    <div class="slide-item"><img src="20.png" alt="Снимка 20"></div>
+    <div class="slide-item"><img src="21.png" alt="Снимка 21"></div>
+    <div class="slide-item"><img src="22.png" alt="Снимка 22"></div>
+  </div>
 
 </body>
 </html>
